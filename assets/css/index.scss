@@ -1,0 +1,281 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: "Nunito", sans-serif;
+}
+body {
+    display: grid;
+    grid-template-columns: 1fr;
+    place-items: center;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: rgb(55,4,4);
+    background: linear-gradient(135deg, rgba(55,4,4,1) 0%, rgba(12,9,75,1) 50%, rgba(116,20,54,1) 100%);
+}
+
+// VARS
+// SMARTPHONE
+$smartphone-width: 300px;
+$smartphone-height: 600px;
+$smartphone-border-radius: 20px;
+$smartphone-bg-color: #212121;
+
+$smartphone-panel-width: 95%;
+$smartphone-panel-height: 50px;
+$smartphone-panel-padding: 10px 0;
+$smartphone-panel-bg-color: #3e3e3e;
+
+$speaker-width: 60px;
+$speaker-height: 10px;
+$speaker-border-radius: 8px;
+$speaker-bg-color: #151515;
+
+$home-button-border-radius: 100%;
+$home-button-size: 35px;
+$home-button-bg-color: #151515;
+$home-button-ico-color: #d2d2d2;
+$home-button-ico-size: 20px;
+
+$inner-windown-filter: blur(.75px);
+$inner-windown-wallpaper: url(../img/halfway-bg-wallpaper.jpg);
+$inner-windown-width: 95%;
+$inner-windown-height: 80%;
+$inner-windown-padding: 15px;
+$inner-window-colums: repeat(3, 72px);
+$inner-window-rows: repeat(5, 72px);
+
+@mixin smartphonePanel {
+    width: $smartphone-panel-width;
+    height: $smartphone-panel-height;
+    padding: $smartphone-panel-padding;
+    background: $smartphone-panel-bg-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.smartphone-app {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: $smartphone-width;
+    height: $smartphone-height;
+    border-radius: $smartphone-border-radius;
+    background-color: $smartphone-bg-color;
+
+    & .smartphone-app__power-button {
+        display: flex;
+        padding: 2px;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        border-radius: 0 2px 2px 0;
+        top: 100px;
+        right: -10px;
+        width: 10px;
+        height: 30px;
+        background: #323232;
+        cursor: pointer;
+
+        & .smartphone-app__power-button-inner {
+            width: 100%;
+            height: 100%;
+            background: #505050;
+        }
+    }
+    & .smartphone-app__top-panel {
+        border-radius: 20px 20px 0 0;
+
+        & .smartphone-speaker {
+            width: $speaker-width;
+            height: $speaker-height;
+            border-radius: $speaker-border-radius;
+            background-color: $speaker-bg-color;
+        }
+    }
+    & .smartphone-app__bottom-panel {
+        border-radius: 0 0 20px 20px;
+
+        & .smartphone-home-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: $home-button-border-radius;
+            height: $home-button-size;
+            width: $home-button-size;
+            background: $home-button-bg-color;
+            color: $home-button-ico-color;
+            font-size: $home-button-ico-size;
+        }
+        & .smartphone-home-button:hover {
+            cursor: pointer;
+        }
+    }
+    & .smartphone-app__top-panel,
+    & .smartphone-app__bottom-panel {
+        @include smartphonePanel;
+    }
+    & .smartphone-app__inner-window {
+        position: relative;
+        display: grid;
+        justify-content: center;
+        place-items: center;
+        grid-template-columns: $inner-window-colums;
+        grid-template-rows: $inner-window-rows;
+        gap: 30px;
+        padding: $inner-windown-padding;
+        width: $inner-windown-width;
+        height: $inner-windown-height;
+
+        & .smartphone-wallpaper {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            background-image: $inner-windown-wallpaper;
+            background-size: cover;
+            background-position: center;
+            filter: $inner-windown-filter;
+        }
+
+        & .app {
+            z-index: 2;
+            user-select: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+
+            & .app-icon img {
+                width: 48px;
+                height: 48px;
+            }
+            & .app-name {
+                font-size: 18px;
+                font-weight: 700;
+                text-align: center;
+            }
+        }
+    }
+}
+
+
+.smartphone-app__inner-window.app {
+    display: flex;
+    width: $inner-windown-width;
+    height: $inner-windown-height;
+    padding: 0;
+}
+
+// GALLERY
+.gallery-app-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background: #a2a2a2;
+
+    & .close-app-btn {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        cursor: pointer;
+        transition: rotate .1s linear;
+        rotate: 45deg;
+
+        & i {
+            font-size: 20px;
+        }
+    }
+    & .close-app-btn:hover {
+        rotate: 0deg;
+    }
+    
+    & .gallery-app-header {
+        height: 35px;
+        background: #fff;
+        user-select: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        & h1 {
+            font-size: 28px;
+        }
+    }
+
+    .gallery-content-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: $inner-windown-height;
+        & .gallery-current-image {
+            width: 100%;
+            height: 370px;
+    
+            & img {
+                width: 100%;
+                height: 370px;
+                object-fit: cover;
+                object-position: center;
+            }
+        }
+    
+        & .gallery-image-list {
+            width: 100%;
+            height: 15%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            margin-top: 15px;
+            gap: 15px;
+
+            & .gallery-pic {
+                width: 50px;
+                height: 50px;
+                background-color: rgba(255, 255, 255, .3);
+                border-radius: 3px;
+                cursor: pointer;
+                transition: scale .15s linear;
+
+                & img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    object-position: center;
+                }
+            }
+            & .gallery-pic:hover {
+                scale: 1.2;
+            }
+        }
+    }
+}
+
+.black-screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: flex;
+}
+.black-screen.off {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #000;
+}
